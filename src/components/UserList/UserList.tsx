@@ -1,6 +1,6 @@
-import UserCard from '../UserCard/UserCard';
-import { User } from '../../interfaces/user';
-import './UserList.css'; 
+import UserCard from "../UserCard/UserCard";
+import { User } from "../../interfaces/user";
+import "./UserList.css";
 
 const UserList = ({ users }: { users: User[] }) => {
   return (

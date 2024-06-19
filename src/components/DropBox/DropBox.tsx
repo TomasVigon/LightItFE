@@ -1,5 +1,5 @@
-import React, { useState, DragEvent, forwardRef } from 'react';
-import './DropBox.css';
+import React, { useState, DragEvent, forwardRef } from "react";
+import "./DropBox.css";
 
 interface DropBoxProps {
   handleDrop: (droppedFiles: FileList) => void;
@@ -46,10 +46,10 @@ const DropBox = forwardRef<DropBoxRef, DropBoxProps>((props, ref) => {
       fileInputRef.current.click();
     }
   };
-  
+
   const clearFileInput = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+      fileInputRef.current.value = "";
     }
   };
 
@@ -68,7 +68,7 @@ const DropBox = forwardRef<DropBoxRef, DropBoxProps>((props, ref) => {
 
   return (
     <div
-      className={`drop-box ${isDragging ? 'dragging' : ''}`}
+      className={`drop-box ${isDragging ? "dragging" : ""}`}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}
@@ -86,7 +86,7 @@ const DropBox = forwardRef<DropBoxRef, DropBoxProps>((props, ref) => {
       <input
         type="file"
         ref={fileInputRef}
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onChange={handleFileInputChange}
         accept=".jpg"
       />

@@ -1,25 +1,26 @@
-
 .drop-box {
-    border: 2px dashed #007BFF;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 4px;
-    background: #f9f9f9;
-    transition: background-color 0.3s, border-color 0.3s;
-  }
-  
-  .drop-box.dragging {
-    background: #e0e0e0;
-    border-color: #0056b3;
-  }
-  
-  .drop-box p {
-    margin: 0;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .drop-box:hover {
-    background: #f1f1f1;
-  }
+  border: 2px dashed #007bff;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 4px;
+  background: #f9f9f9;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
+}
+
+.drop-box.dragging {
+  background: #e0e0e0;
+  border-color: #0056b3;
+}
+
+.drop-box p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.drop-box:hover {
+  background: #f1f1f1;
+}

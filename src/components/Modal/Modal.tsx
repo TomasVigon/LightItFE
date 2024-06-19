@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import './Modal.css';
+import React, { useRef } from "react";
+import "./Modal.css";
 
 interface ModalProps {
   isOpen: boolean;
