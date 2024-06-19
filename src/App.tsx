@@ -11,13 +11,11 @@ import "./App.css";
 const App = () => {
   const [users, setUsers] = useLocalStorage("users", []);
   const [modalOpen, setModalOpen] = useState(false);
+  const [message, setMessage] = useState("");
 
   const addUser = async (user: User) => {
     const base64File = !!user.photo && (await fileToBase64(user.photo));
 
-    setUsers([...users, user]);
-
-    //@ts-ignore
     instance
       .post("/patients", {
         ...user,
@@ -27,8 +25,14 @@ const App = () => {
       .then((response) => {
         console.log("Reponse:", response.data);
         setModalOpen(true);
+        setMessage("User added successfully!");
+        setUsers([...users, user]);
       })
-      .catch((error) => console.error("Error adding user:", error));
+      .catch((error) => {
+        console.error("Error adding user:", error); 
+        setMessage("Error adding user. Please try again."); 
+        setModalOpen(true);}
+      );
   };
 
   const closeModal = () => {
@@ -42,7 +46,7 @@ const App = () => {
       <UserList users={users} />
       <Modal
         isOpen={modalOpen}
-        message={"User added successfully"}
+        message={message}
         onClose={closeModal}
       />
     </div>

@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, message }) => {
         <button className="modal-close" onClick={onClose}>
           &times;
         </button>
-        <h2>Modal Title</h2>
+        <h2>Upload Status</h2>
         <p>{message}</p>
       </div>
     </dialog>
