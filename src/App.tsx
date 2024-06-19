@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import UserList from './components/UserList';
-import UserForm from './components/UserForm';
-import Modal from './components/modal';
+import UserList from './components/UserList/UserList';
+import UserForm from './components/UserForm/UserForm';
+import Modal from './components/Modal/Modal';
 import { User } from './interfaces/user';
 import useLocalStorage from './hooks/useLocalStorage';
 import instance from './clients/axios';
 import { fileToBase64 } from './utils/file';
+import './App.css';
 
 const App = () => {
   const [users, setUsers] = useLocalStorage('users', []);

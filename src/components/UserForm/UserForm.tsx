@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
-import DropBox, { DropBoxRef } from './DropBox';
-import { User, UserErrors, UserFormData } from '../interfaces/user';
-import { validateName, validateEmail, validatePhone, validatePhoto, validatePhotoSize } from '../utils/validations';
+import DropBox, { DropBoxRef } from '../DropBox/DropBox';
+import { User, UserErrors, UserFormData } from '../../interfaces/user';
+import { validateName, validateEmail, validatePhone, validatePhoto, validatePhotoSize } from '../../utils/validations';
+import './UserForm.css';
 
 const UserForm: React.FC<{ addUser: (user: User) => void }> = ({ addUser }) => {
   const dropBoxRef = useRef<DropBoxRef>(null);
@@ -12,7 +13,7 @@ const UserForm: React.FC<{ addUser: (user: User) => void }> = ({ addUser }) => {
     country: undefined,
     phone: undefined,
     photo: null,
-  })
+  });
   
   const [errors, setErrors] = useState<UserErrors>({});
 
@@ -20,7 +21,7 @@ const UserForm: React.FC<{ addUser: (user: User) => void }> = ({ addUser }) => {
     if (dropBoxRef.current) {
       const fileInput = dropBoxRef.current.getFileInput();
       if (fileInput) {
-        fileInput.value='';
+        fileInput.value = '';
       }
     }
   };
@@ -33,8 +34,7 @@ const UserForm: React.FC<{ addUser: (user: User) => void }> = ({ addUser }) => {
   const handleFile = (file: File | undefined) => {
     if (file && file.type === 'image/jpeg') {
       setFormData({ ...formData, photo: file });
-      setErrors({ ...errors, photo: '' }); // Clear previous error
-      
+      setErrors({ ...errors, photo: '' }); 
     } else {
       setFormData({ ...formData, photo: null });
       setErrors({ ...errors, photo: 'Only .jpg files are allowed' });
@@ -61,9 +61,9 @@ const UserForm: React.FC<{ addUser: (user: User) => void }> = ({ addUser }) => {
         ...formData,
         phone: Number(`${formData.country}${formData.phone}`),
       };
-      
+
       addUser(newData);
-      setFormData({ name: '', email: '', country: undefined, phone: undefined, photo: null });
+      setFormData({ name: '', email: '', country: NaN, phone: NaN, photo: null });
       setErrors({});
       clearFileInput();
     } else {
@@ -76,29 +76,33 @@ const UserForm: React.FC<{ addUser: (user: User) => void }> = ({ addUser }) => {
       <div>
         <label>Name</label>
         <input type="text" name="name" value={formData.name} onChange={handleChange} />
-        {errors.name && <span>{errors.name}</span>}
+        {errors.name && <span className="error-message">{errors.name}</span>}
       </div>
       <div>
         <label>Email</label>
         <input type="text" name="email" value={formData.email} onChange={handleChange} />
-        {errors.email && <span>{errors.email}</span>}
+        {errors.email && <span className="error-message">{errors.email}</span>}
       </div>
-      <div>
-        <label>Country Code</label>
-        <input type="number" name="country" value={formData.country} onChange={handleChange} />
-        <label>Phone Number</label>
-        <input type="number" name="phone" value={formData.phone} onChange={handleChange} />
-        {errors.phone && <span>{errors.phone}</span>}
+      <div className="inline-fields">
+        <div>
+          <label>Country Code</label>
+          <input type="number" name="country" value={formData.country} onChange={handleChange} />
+        </div>
+        <div>
+          <label>Phone Number</label>
+          <input type="number" name="phone" value={formData.phone} onChange={handleChange} />
+        </div>
       </div>
+      {errors.phone && <span className="error-message">{errors.phone}</span>}
       <div>
         <label>Document Photo</label>
         <DropBox ref={dropBoxRef} handleDrop={handleDrop} selectedFile={formData.photo} />
         {formData.photo && (
-          <p>
-            Selected file: {formData.photo.name} ({(formData.photo.size / 1024).toFixed(2)} KB)
-          </p>
+          <div className="selected-file">
+            <p>Selected file: {formData.photo.name} ({(formData.photo.size / 1024).toFixed(2)} KB)</p>
+          </div>
         )}
-        {errors.photo && <span>{errors.photo}</span>}
+        {errors.photo && <span className="error-message">{errors.photo}</span>}
       </div>
       <button type="submit">Add User</button>
     </form>

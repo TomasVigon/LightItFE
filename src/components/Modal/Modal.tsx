@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import './Modal.css';
 
 interface ModalProps {
   isOpen: boolean;
@@ -19,10 +20,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, message }) => {
 
   return (
     <dialog ref={dialogRef} className="modal">
-      <button className="modal-close" onClick={onClose}>
-        &times;
-      </button>
       <div className="modal-content">
+        <button className="modal-close" onClick={onClose}>
+          &times;
+        </button>
         <h2>Modal Title</h2>
         <p>{message}</p>
       </div>

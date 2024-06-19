@@ -26,7 +26,6 @@ export const fileToBase64 = (file: File) => {
 }
   
 export const base64ToFile = (base64String: string, filename: string, mimeType: string): File => {
-    // Convert the Base64 string to a ArrayBuffer
     const byteCharacters = atob(base64String);
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
@@ -35,7 +34,6 @@ export const base64ToFile = (base64String: string, filename: string, mimeType: s
     const byteArray = new Uint8Array(byteNumbers);
     const blob = new Blob([byteArray], { type: mimeType });
   
-    // Create a File object from Blob
     const file = new File([blob], filename, { type: mimeType });
     return file;
   }

@@ -1,8 +1,8 @@
-import React from 'react';
-import UserCard from './UserCard';
-import { User } from '../interfaces/user';
+import UserCard from '../UserCard/UserCard';
+import { User } from '../../interfaces/user';
+import './UserList.css'; 
 
-const UserList = ({ users }: { users: User[]}) => {
+const UserList = ({ users }: { users: User[] }) => {
   return (
     <div className="user-list">
       {users.length === 0 ? (

@@ -1,4 +1,5 @@
 import React, { useState, DragEvent, forwardRef } from 'react';
+import './DropBox.css';
 
 interface DropBoxProps {
   handleDrop: (droppedFiles: FileList) => void;
@@ -47,7 +48,6 @@ const DropBox = forwardRef<DropBoxRef, DropBoxProps>((props, ref) => {
   };
   
   const clearFileInput = () => {
-    // Reset the value of the input to clear the selected file
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -64,12 +64,10 @@ const DropBox = forwardRef<DropBoxRef, DropBoxProps>((props, ref) => {
 
   React.useImperativeHandle(ref, () => ({
     getFileInput: () => fileInputRef.current,
-    // You can add more functions or properties to expose as needed
   }));
 
   return (
     <div
-      style={{ backgroundColor: 'red'}}
       className={`drop-box ${isDragging ? 'dragging' : ''}`}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
@@ -78,7 +76,13 @@ const DropBox = forwardRef<DropBoxRef, DropBoxProps>((props, ref) => {
       onClick={handleClick}
       onMouseDown={preventDefaults}
     >
-      {!!selectedFile ? <p>{selectedFile.name}</p> : isDragging ? <p>Drop your files here</p> : <p>Drag and drop your files here, or click to select files</p>}
+      {!!selectedFile ? (
+        <p>{selectedFile.name}</p>
+      ) : isDragging ? (
+        <p>Drop your files here</p>
+      ) : (
+        <p>Drag and drop your files here, or click to select files</p>
+      )}
       <input
         type="file"
         ref={fileInputRef}
